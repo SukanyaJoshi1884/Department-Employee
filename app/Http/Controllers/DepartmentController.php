@@ -12,6 +12,10 @@ class DepartmentController extends Controller
      *
      * @return void
      */
+
+   
+
+
     private $departmentRepository;
 
     public function __construct(DepartmentInterface $departmentRepository)
@@ -23,6 +27,26 @@ class DepartmentController extends Controller
      * Function to display all the departments
      *
      * @return \Illuminate\Http\Response
+     */
+     /**
+     * @api {get} /department List department data
+     * @apiName department
+     * @apiGroup Departments
+     *
+     * @apiSuccess {Number} id ID of department.
+     * @apiSuccess {String} name  Name of department.
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     "data": [
+     *         {
+     *          "id": 1,
+     *          "name": "Computer",
+     *          "created_at": "2020-09-16T17:17:32.000000Z",
+     *          "updated_at": "2020-09-16T17:17:32.000000Z"
+     *          }
+     *      ]
+     *
      */
     public function index()
     {
@@ -44,6 +68,28 @@ class DepartmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * @api {post} /department Create new department data
+     * @apiName create-department
+     * @apiGroup Departments
+     * @apiParam {String} name Name of department
+     * @apiSuccess {Number} id ID of department.
+     * @apiSuccess {String} name  Name of department.
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     "data": [
+     *         {
+     *          "id": 1,
+     *          "name": "Computer",
+     *          "created_at": "2020-09-16T17:17:32.000000Z",
+     *          "updated_at": "2020-09-16T17:17:32.000000Z"
+     *          }
+     *      ]
+     *
+     */
+
     public function create(Request $request)
     {
         //validate form fields
@@ -64,6 +110,34 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * @api {get} /department/{id} Show department data
+     * @apiName show-department
+     * @apiGroup Departments
+     * @apiParam {Number} id ID of department
+     * @apiSuccess {Number} id ID of department.
+     * @apiSuccess {String} name  Name of department.
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     "data": [
+     *         {
+     *          "id": 1,
+     *          "name": "Computer",
+     *          "created_at": "2020-09-16T17:17:32.000000Z",
+     *          "updated_at": "2020-09-16T17:17:32.000000Z"
+     *          }
+     *      ]
+     *
+     * @apiError Not found The id of the department was not found.
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *       "message": "No data found"
+     *     }
+     */
     public function show($id)
     {
 
@@ -83,12 +157,45 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * @api {post} /department/{id} Update department data
+     * @apiName update-department
+     * @apiGroup Departments
+     * @apiParam {String} name Name of department
+     * @apiSuccess {Number} id ID of department.
+     * @apiSuccess {String} name  Name of department.
+     *
+     * @apiSuccessExample Success-Response:
+     *     HTTP/1.1 200 OK
+     *     "data": [
+     *         {
+     *          "id": 1,
+     *          "name": "Computer",
+     *          "created_at": "2020-09-16T17:17:32.000000Z",
+     *          "updated_at": "2020-09-16T17:17:32.000000Z"
+     *          }
+     *      ]
+     *
+     */
     public function update(Request $request, $id)
     {
         //validate form fields
         $this->validate($request, [
             'name' => 'required',
         ]);
+        $data = $request->all();
+        $updateDepartment = $this->departmentRepository->update($id,$data);
+        if($updateDepartment){
+            $newData = $this->departmentRepository->get($id);
+            return response()
+            ->json(['result' => $newData], 200);
+        }
+            
+        else
+            return response()
+            ->json(['message' => 'Unable to update data'], 400);
+
     }
 
     /**
@@ -97,8 +204,33 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    /**
+     * @api {delete} /department/{id} Delete department
+     * @apiName delete-department
+     * @apiGroup Departments
+     * @apiSuccessExample Success-Response:
+        HTTP/1.1 200 Success
+     *     {
+     *       "message": "Deleted successfully"
+     *     }
+     *
+     * @apiError Unable to delete
+     *
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 400
+     *     {
+     *       "message": "Unable to delete"
+     *     }
+     */
     public function destroy($id)
     {
-        //
+        $delete = $this->departmentRepository->delete($id);
+        if($delete)
+            return response()
+            ->json(['message' => 'Deleted successfully'], 200);
+        else
+            return response()
+            ->json(['message' => 'Unable to delete'], 400);
     }
 }

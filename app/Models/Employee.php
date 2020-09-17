@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Departments extends Model
+class Employee extends Model
 {
     /**
      * Name of the table
      *
      * @var string
      */
-    protected $table = 'table_department';
+    protected $table = 'table_employee';
     
     /**
      * The attributes that are mass assignable.
@@ -19,16 +19,15 @@ class Departments extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'first_name','last_name','email'
     ];
 
     /**
-     * Get the employees for the departmant.
+     * Get the department for employee.
      */
-    public function employees()
+    public function department()
     {
-        return $this->hasMany('App\Models\Employee');
+        return $this->belongsTo('App\Models\Department');
     }
-    
     
 }

@@ -24,7 +24,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
   $router->post('department', ['uses' => 'DepartmentController@create']);
 
-  $router->delete('department/{id}', ['uses' => 'DepartmentController@delete']);
+  $router->delete('department/{id}', ['uses' => 'DepartmentController@destroy']);
 
   $router->put('department/{id}', ['uses' => 'DepartmentController@update']);
 });
