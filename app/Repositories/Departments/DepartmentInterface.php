@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 interface DepartmentInterface{ 
 	
 	/**
-     * Get's a category by it's ID
+     * Get's a department by it's ID
      *
      * @param int
      */
@@ -14,23 +14,22 @@ interface DepartmentInterface{
 
 
 	/**
-     * Get's all category.
+     * Get's all department.
      *
-     *@Author Pooja <pooja.lavhat@neosofttech.com>
-     * @return $category
+     * @return $department
      */
     public function all();
 
 
     /**
-     * Save a category.
+     * Save a department.
      *
      * @param array
      */
     public function save(array $data);
 
     /**
-     * Updates a category.
+     * Updates a department.
      *
      * @param int
      * @param array
@@ -38,7 +37,7 @@ interface DepartmentInterface{
     public function update($id,array $data);
 
     /**
-     * Deletes a category.
+     * Deletes a department.
      *
      * @param int
      */

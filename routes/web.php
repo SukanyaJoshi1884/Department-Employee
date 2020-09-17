@@ -27,4 +27,15 @@ $router->group(['prefix' => 'api'], function () use ($router) {
   $router->delete('department/{id}', ['uses' => 'DepartmentController@destroy']);
 
   $router->put('department/{id}', ['uses' => 'DepartmentController@update']);
+
+
+  $router->get('employee',  ['uses' => 'EmployeeController@index']);
+
+  $router->get('employee/{id}', ['uses' => 'EmployeeController@show']);
+
+  $router->post('employee', ['uses' => 'EmployeeController@create']);
+
+  $router->delete('employee/{id}', ['uses' => 'EmployeeController@destroy']);
+
+  $router->put('employee/{id}', ['uses' => 'EmployeeController@update']);
 });

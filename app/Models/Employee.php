@@ -19,7 +19,7 @@ class Employee extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','email'
+        'first_name','last_name','email','dept_id'
     ];
 
     /**
@@ -27,7 +27,12 @@ class Employee extends Model
      */
     public function department()
     {
-        return $this->belongsTo('App\Models\Department');
+        return $this->belongsTo('App\Models\Departments','dept_id');
+    }
+
+    public function employees_contacts()
+    {
+        return $this->hasMany('App\Models\EmployeeContacts','emp_id');
     }
     
 }
