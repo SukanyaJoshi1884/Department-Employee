@@ -40,7 +40,16 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"data\": [\n    {\n     \"id\": 1,\n     \"name\": \"Computer\",\n     \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n     \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n     }\n ]",
+          "content": "HTTP/1.1 200 OK\n       {\n            \"status\": \"Success\",\n            \"result\": {\n                \"name\": \"Admin\",\n                \"updated_at\": \"2020-09-17T13:55:32.000000Z\",\n                \"created_at\": \"2020-09-17T13:55:32.000000Z\",\n                \"id\": 5\n            },\n            \"message\": \"Department created\"\n        }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n        {\n            \"name\": [\n                \"The name field is required.\"\n            ]\n        }",
           "type": "json"
         }
       ]
@@ -59,7 +68,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 Success\n{\n  \"message\": \"Deleted successfully\"\n}",
+          "content": "HTTP/1.1 200 Success\n   {\n     \"status\":\"Success\",\n     \"message\": \"Deleted successfully\"\n   }",
           "type": "json"
         }
       ]
@@ -78,7 +87,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 400\n{\n  \"message\": \"Unable to delete\"\n}",
+          "content": "HTTP/1.1 400\n{\n   \"status\":\"Failed\",\n  \"message\": \"Unable to delete\"\n}",
           "type": "json"
         }
       ]
@@ -115,7 +124,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"data\": [\n    {\n     \"id\": 1,\n     \"name\": \"Computer\",\n     \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n     \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n     }\n ]",
+          "content": "HTTP/1.1 200 OK\n{\n            \"status\": \"Success\",\n            \"data\": [\n                {\n                    \"id\": 1,\n                    \"name\": \"mechanical\",\n                    \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                    \"updated_at\": \"2020-09-17T13:45:28.000000Z\"\n                },\n                {\n                    \"id\": 3,\n                    \"name\": \"Admin\",\n                    \"created_at\": \"2020-09-17T13:40:07.000000Z\",\n                    \"updated_at\": \"2020-09-17T13:40:07.000000Z\"\n                },\n                {\n                    \"id\": 4,\n                    \"name\": \"Admin\",\n                    \"created_at\": \"2020-09-17T13:44:28.000000Z\",\n                    \"updated_at\": \"2020-09-17T13:44:28.000000Z\"\n                },\n                {\n                    \"id\": 5,\n                    \"name\": \"Admin\",\n                    \"created_at\": \"2020-09-17T13:55:32.000000Z\",\n                    \"updated_at\": \"2020-09-17T13:55:32.000000Z\"\n                }\n            ]\n        }",
           "type": "json"
         }
       ]
@@ -165,7 +174,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"data\": [\n    {\n     \"id\": 1,\n     \"name\": \"Computer\",\n     \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n     \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n     }\n ]",
+          "content": "HTTP/1.1 200 OK\n        {\n            \"status\": \"Success\",\n            \"result\": {\n                \"id\": 5,\n                \"name\": \"Admin\",\n                \"created_at\": \"2020-09-17T13:55:32.000000Z\",\n                \"updated_at\": \"2020-09-17T13:55:32.000000Z\"\n            }\n        }",
           "type": "json"
         }
       ]
@@ -184,7 +193,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"No data found\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n   \"status\": \"Failed\",\n  \"message\": \"No data found\"\n}",
           "type": "json"
         }
       ]
@@ -234,7 +243,21 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"data\": [\n    {\n     \"id\": 1,\n     \"name\": \"Computer\",\n     \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n     \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n     }\n ]",
+          "content": "HTTP/1.1 200 OK\n       {\n            \"status\": \"Success\",\n            \"result\": {\n                \"id\": 1,\n                \"name\": \"mechanical\",\n                \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                \"updated_at\": \"2020-09-17T13:45:28.000000Z\"\n            }\n        }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n   \"status\":\"Failed\",\n  \"message\": \"No data found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Unable to update data\n{\n    \"status\":\"Failed\",\n  \"message\": \"Unable to update data\"\n}",
           "type": "json"
         }
       ]
@@ -347,7 +370,16 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"result\": {\n            \"id\": 6,\n            \"first_name\": \"sukanya\",\n            \"last_name\": \"joshi\",\n            \"email\": \"sdsf@dsfdf.com\",\n            \"dept_id\": 1,\n            \"created_at\": \"2020-09-17T13:14:16.000000Z\",\n            \"updated_at\": \"2020-09-17T13:14:16.000000Z\",\n            \"employees_contacts\": [\n                {\n                    \"id\": 11,\n                    \"emp_id\": 6,\n                    \"address\": \"sdfcdf\",\n                    \"contact_number\": \"54684684654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                },\n                {\n                    \"id\": 12,\n                    \"emp_id\": 6,\n                    \"address\": \"dfdfvdfv\",\n                    \"contact_number\": \"4645454654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                }\n            ]\n        },\n        \"message\": \"Employee created\"",
+          "content": "HTTP/1.1 200 OK\n{\n            \"status\": \"Success\",\n            \"result\": {\n                \"id\": 7,\n                \"first_name\": \"sukanya\",\n                \"last_name\": \"joshi\",\n                \"email\": \"sdsf@dsfdf.com\",\n                \"dept_id\": 1,\n                \"created_at\": \"2020-09-17T14:11:26.000000Z\",\n                \"updated_at\": \"2020-09-17T14:11:26.000000Z\",\n                \"employees_contacts\": [\n                    {\n                        \"id\": 13,\n                        \"emp_id\": 7,\n                        \"address\": \"sdfcdf\",\n                        \"contact_number\": \"54684684654\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    },\n                    {\n                        \"id\": 14,\n                        \"emp_id\": 7,\n                        \"address\": \"dfdfvdfv\",\n                        \"contact_number\": \"4645454654\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    }\n                ]\n            },\n            \"message\": \"Employee created\"\n    }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n       {\n           \"first_name\": [\n               \"The first name field is required.\"\n           ],\n           \"last_name\": [\n               \"The last name field is required.\"\n           ]\n       }",
           "type": "json"
         }
       ]
@@ -366,7 +398,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    HTTP/1.1 200 Success\n{\n  \"message\": \"Deleted successfully\"\n}",
+          "content": "    HTTP/1.1 200 Success\n{\n   \"status\":\"Success\",\n  \"message\": \"Deleted successfully\"\n}",
           "type": "json"
         }
       ]
@@ -385,7 +417,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 400\n{\n  \"message\": \"Unable to delete\"\n}",
+          "content": "HTTP/1.1 400\n{\n   \"status\":  \"Failed\",\n  \"message\": \"Unable to delete\"\n}",
           "type": "json"
         }
       ]
@@ -443,7 +475,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n\"data\": [\n    \"result\": {\n            \"id\": 5,\n            \"first_name\": \"sukanya\",\n            \"last_name\": \"joshi\",\n            \"email\": \"sdsf@dsfdf.com\",\n            \"dept_id\": 1,\n            \"created_at\": \"2020-09-17T10:57:35.000000Z\",\n            \"updated_at\": \"2020-09-17T10:57:35.000000Z\",\n            \"employees_contacts\": [\n                {\n                    \"id\": 9,\n                    \"emp_id\": 5,\n                    \"address\": \"sdfcdf\",\n                    \"contact_number\": \"54684684654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                },\n                {\n                    \"id\": 10,\n                    \"emp_id\": 5,\n                    \"address\": \"dfdfvdfv\",\n                    \"contact_number\": \"4645454654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                }\n            ]\n        },\n        {\n            ...\n        }\n ]",
+          "content": "HTTP/1.1 200 OK\n{\n            \"status\": \"Success\",\n            \"data\": [\n                {\n                    \"id\": 1,\n                    \"first_name\": \"sukanya\",\n                    \"last_name\": \"joshi\",\n                    \"email\": \"sdsf@dsfdf.com\",\n                    \"dept_id\": 1,\n                    \"created_at\": \"2020-09-17T10:55:40.000000Z\",\n                    \"updated_at\": \"2020-09-17T10:55:40.000000Z\",\n                    \"employees_contacts\": [\n                        {\n                            \"id\": 1,\n                            \"emp_id\": 1,\n                            \"address\": \"sdfcdf\",\n                            \"contact_number\": \"54684684654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        },\n                        {\n                            \"id\": 2,\n                            \"emp_id\": 1,\n                            \"address\": \"dfdfvdfv\",\n                            \"contact_number\": \"4645454654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        }\n                    ],\n                    \"department\": {\n                        \"id\": 1,\n                        \"name\": \"mechanical\",\n                        \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                        \"updated_at\": \"2020-09-17T13:45:28.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 2,\n                    \"first_name\": \"sukanya\",\n                    \"last_name\": \"joshi\",\n                    \"email\": \"sdsf@dsfdf.com\",\n                    \"dept_id\": 1,\n                    \"created_at\": \"2020-09-17T10:56:02.000000Z\",\n                    \"updated_at\": \"2020-09-17T10:56:02.000000Z\",\n                    \"employees_contacts\": [\n                        {\n                            \"id\": 3,\n                            \"emp_id\": 2,\n                            \"address\": \"sdfcdf\",\n                            \"contact_number\": \"54684684654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        },\n                        {\n                            \"id\": 4,\n                            \"emp_id\": 2,\n                            \"address\": \"dfdfvdfv\",\n                            \"contact_number\": \"4645454654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        }\n                    ],\n                    \"department\": {\n                        \"id\": 1,\n                        \"name\": \"mechanical\",\n                        \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                        \"updated_at\": \"2020-09-17T13:45:28.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 3,\n                    \"first_name\": \"sukanya\",\n                    \"last_name\": \"joshi\",\n                    \"email\": \"sdsf@dsfdf.com\",\n                    \"dept_id\": 1,\n                    \"created_at\": \"2020-09-17T10:56:42.000000Z\",\n                    \"updated_at\": \"2020-09-17T10:56:42.000000Z\",\n                    \"employees_contacts\": [\n                        {\n                            \"id\": 5,\n                            \"emp_id\": 3,\n                            \"address\": \"sdfcdf\",\n                            \"contact_number\": \"54684684654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        },\n                        {\n                            \"id\": 6,\n                            \"emp_id\": 3,\n                            \"address\": \"dfdfvdfv\",\n                            \"contact_number\": \"4645454654\",\n                            \"created_at\": null,\n                            \"updated_at\": null\n                        }\n                    ],\n                    \"department\": {\n                        \"id\": 1,\n                        \"name\": \"mechanical\",\n                        \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                        \"updated_at\": \"2020-09-17T13:45:28.000000Z\"\n                    }\n                }\n                \n            ]\n        }",
           "type": "json"
         }
       ]
@@ -521,7 +553,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n        \"result\": {\n            \"id\": 4,\n            \"first_name\": \"sukanya\",\n            \"last_name\": \"joshi\",\n            \"email\": \"sdsf@dsfdf.com\",\n            \"dept_id\": 1,\n            \"created_at\": \"2020-09-17T10:57:17.000000Z\",\n            \"updated_at\": \"2020-09-17T10:57:17.000000Z\",\n            \"department\": {\n                \"id\": 1,\n                \"name\": \"Computer\",\n                \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n            },\n            \"employees_contacts\": [\n                {\n                    \"id\": 7,\n                    \"emp_id\": 4,\n                    \"address\": \"sdfcdf\",\n                    \"contact_number\": \"54684684654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                },\n                {\n                    \"id\": 8,\n                    \"emp_id\": 4,\n                    \"address\": \"dfdfvdfv\",\n                    \"contact_number\": \"4645454654\",\n                    \"created_at\": null,\n                    \"updated_at\": null\n                }\n            ]\n        }",
+          "content": "HTTP/1.1 200 OK\n        {\n            \"result\": {\n                \"id\": 4,\n                \"first_name\": \"sukanya\",\n                \"last_name\": \"joshi\",\n                \"email\": \"sdsf@dsfdf.com\",\n                \"dept_id\": 1,\n                \"created_at\": \"2020-09-17T10:57:17.000000Z\",\n                \"updated_at\": \"2020-09-17T10:57:17.000000Z\",\n                \"department\": {\n                    \"id\": 1,\n                    \"name\": \"Computer\",\n                    \"created_at\": \"2020-09-16T17:17:32.000000Z\",\n                    \"updated_at\": \"2020-09-16T17:17:32.000000Z\"\n                },\n                \"employees_contacts\": [\n                    {\n                        \"id\": 7,\n                        \"emp_id\": 4,\n                        \"address\": \"sdfcdf\",\n                        \"contact_number\": \"54684684654\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    },\n                    {\n                        \"id\": 8,\n                        \"emp_id\": 4,\n                        \"address\": \"dfdfvdfv\",\n                        \"contact_number\": \"4645454654\",\n                        \"created_at\": null,\n                        \"updated_at\": null\n                    }\n                ]\n            }\n        }",
           "type": "json"
         }
       ]
@@ -540,7 +572,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"No data found\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n         \"status\":\"Failed\",\n  \"message\": \"No data found\"\n}",
           "type": "json"
         }
       ]

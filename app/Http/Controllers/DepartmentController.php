@@ -38,14 +38,35 @@ class DepartmentController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+     *     {
+                "status": "Success",
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "mechanical",
+                        "created_at": "2020-09-16T17:17:32.000000Z",
+                        "updated_at": "2020-09-17T13:45:28.000000Z"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Admin",
+                        "created_at": "2020-09-17T13:40:07.000000Z",
+                        "updated_at": "2020-09-17T13:40:07.000000Z"
+                    },
+                    {
+                        "id": 4,
+                        "name": "Admin",
+                        "created_at": "2020-09-17T13:44:28.000000Z",
+                        "updated_at": "2020-09-17T13:44:28.000000Z"
+                    },
+                    {
+                        "id": 5,
+                        "name": "Admin",
+                        "created_at": "2020-09-17T13:55:32.000000Z",
+                        "updated_at": "2020-09-17T13:55:32.000000Z"
+                    }
+                ]
+            }
      *
      */
     public function index()
@@ -54,12 +75,12 @@ class DepartmentController extends Controller
         if(count($departments)>0)
         {
             return response()
-            ->json(['data' => $departments], 200); 
+            ->json(['status'=>'Success','data' => $departments], 200); 
         }
         else
         {
             return response()
-            ->json(['message' => 'No data found'], 404); 
+            ->json(['status'=>'Failed','message' => 'No data found'], 404); 
         }
     }
 
@@ -79,14 +100,24 @@ class DepartmentController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+           {
+                "status": "Success",
+                "result": {
+                    "name": "Admin",
+                    "updated_at": "2020-09-17T13:55:32.000000Z",
+                    "created_at": "2020-09-17T13:55:32.000000Z",
+                    "id": 5
+                },
+                "message": "Department created"
+            }
+     *      
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 422 Unprocessable Entity
+            {
+                "name": [
+                    "The name field is required."
+                ]
+            }
      *
      */
 
@@ -101,7 +132,7 @@ class DepartmentController extends Controller
         $create = $this->departmentRepository->save($data);
         if($create)
             return response()
-            ->json(['result' => $create, 'message'=>'Department created'], 200);
+            ->json(['status'=>'Success','result' => $create, 'message'=>'Department created'], 200);
     }
 
     /**
@@ -121,20 +152,23 @@ class DepartmentController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+            {
+                "status": "Success",
+                "result": {
+                    "id": 5,
+                    "name": "Admin",
+                    "created_at": "2020-09-17T13:55:32.000000Z",
+                    "updated_at": "2020-09-17T13:55:32.000000Z"
+                }
+            }
+     *      
      *
      * @apiError Not found The id of the department was not found.
      *
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 404 Not Found
      *     {
+     *        "status": "Failed",
      *       "message": "No data found"
      *     }
      */
@@ -144,10 +178,10 @@ class DepartmentController extends Controller
         $showDepartment = $this->departmentRepository->get($id);
         if($showDepartment)
             return response()
-            ->json(['result' => $showDepartment], 200);
+            ->json(['status'=>'Success','result' => $showDepartment], 200);
         else
             return response()
-            ->json(['message' => 'No data found'], 404); 
+            ->json(['status'=>'Failed','message' => 'No data found'], 404); 
     }
 
     /**
@@ -168,14 +202,29 @@ class DepartmentController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+           {
+                "status": "Success",
+                "result": {
+                    "id": 1,
+                    "name": "mechanical",
+                    "created_at": "2020-09-16T17:17:32.000000Z",
+                    "updated_at": "2020-09-17T13:45:28.000000Z"
+                }
+            }
+     *      
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 404 Not Found
+     *     {
+     *        "status":"Failed",
+     *       "message": "No data found"
+     *     }
+
+     * @apiErrorExample Error-Response:
+     *     HTTP/1.1 404 Unable to update data
+     *     {
+     *         "status":"Failed",
+     *       "message": "Unable to update data"
+     *     }
      *
      */
     public function update(Request $request, $id)
@@ -185,16 +234,22 @@ class DepartmentController extends Controller
             'name' => 'required',
         ]);
         $data = $request->all();
-        $updateDepartment = $this->departmentRepository->update($id,$data);
-        if($updateDepartment){
-            $newData = $this->departmentRepository->get($id);
-            return response()
-            ->json(['result' => $newData], 200);
+        $checkDepartment = $this->departmentRepository->get($id);
+        if($checkDepartment)
+        {
+            $updateDepartment = $this->departmentRepository->update($id,$data);
+            if($updateDepartment){
+                $newData = $this->departmentRepository->get($id);
+                return response()
+                ->json(['status'=>'Success','result' => $newData], 200);
+            }    
+            else
+                return response()
+                ->json(['status'=>'Failed','message' => 'Unable to update data'], 400);
         }
-            
         else
             return response()
-            ->json(['message' => 'Unable to update data'], 400);
+            ->json(['status'=>'Failed','message' => 'Department not found'], 404);
 
     }
 
@@ -210,8 +265,9 @@ class DepartmentController extends Controller
      * @apiName delete-department
      * @apiGroup Departments
      * @apiSuccessExample Success-Response:
-        HTTP/1.1 200 Success
+     *  HTTP/1.1 200 Success
      *     {
+     *       "status":"Success",
      *       "message": "Deleted successfully"
      *     }
      *
@@ -220,6 +276,7 @@ class DepartmentController extends Controller
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 400
      *     {
+     *        "status":"Failed",
      *       "message": "Unable to delete"
      *     }
      */
@@ -228,9 +285,9 @@ class DepartmentController extends Controller
         $delete = $this->departmentRepository->delete($id);
         if($delete)
             return response()
-            ->json(['message' => 'Deleted successfully'], 200);
+            ->json(['status'=>'Success','message' => 'Deleted successfully'], 200);
         else
             return response()
-            ->json(['message' => 'Unable to delete'], 400);
+            ->json(['status'=>'Failed','message' => 'Unable to delete'], 400);
     }
 }

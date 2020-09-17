@@ -38,39 +38,113 @@ class EmployeeController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         "result": {
-                "id": 5,
-                "first_name": "sukanya",
-                "last_name": "joshi",
-                "email": "sdsf@dsfdf.com",
-                "dept_id": 1,
-                "created_at": "2020-09-17T10:57:35.000000Z",
-                "updated_at": "2020-09-17T10:57:35.000000Z",
-                "employees_contacts": [
+     *     {
+                "status": "Success",
+                "data": [
                     {
-                        "id": 9,
-                        "emp_id": 5,
-                        "address": "sdfcdf",
-                        "contact_number": "54684684654",
-                        "created_at": null,
-                        "updated_at": null
+                        "id": 1,
+                        "first_name": "sukanya",
+                        "last_name": "joshi",
+                        "email": "sdsf@dsfdf.com",
+                        "dept_id": 1,
+                        "created_at": "2020-09-17T10:55:40.000000Z",
+                        "updated_at": "2020-09-17T10:55:40.000000Z",
+                        "employees_contacts": [
+                            {
+                                "id": 1,
+                                "emp_id": 1,
+                                "address": "sdfcdf",
+                                "contact_number": "54684684654",
+                                "created_at": null,
+                                "updated_at": null
+                            },
+                            {
+                                "id": 2,
+                                "emp_id": 1,
+                                "address": "dfdfvdfv",
+                                "contact_number": "4645454654",
+                                "created_at": null,
+                                "updated_at": null
+                            }
+                        ],
+                        "department": {
+                            "id": 1,
+                            "name": "mechanical",
+                            "created_at": "2020-09-16T17:17:32.000000Z",
+                            "updated_at": "2020-09-17T13:45:28.000000Z"
+                        }
                     },
                     {
-                        "id": 10,
-                        "emp_id": 5,
-                        "address": "dfdfvdfv",
-                        "contact_number": "4645454654",
-                        "created_at": null,
-                        "updated_at": null
+                        "id": 2,
+                        "first_name": "sukanya",
+                        "last_name": "joshi",
+                        "email": "sdsf@dsfdf.com",
+                        "dept_id": 1,
+                        "created_at": "2020-09-17T10:56:02.000000Z",
+                        "updated_at": "2020-09-17T10:56:02.000000Z",
+                        "employees_contacts": [
+                            {
+                                "id": 3,
+                                "emp_id": 2,
+                                "address": "sdfcdf",
+                                "contact_number": "54684684654",
+                                "created_at": null,
+                                "updated_at": null
+                            },
+                            {
+                                "id": 4,
+                                "emp_id": 2,
+                                "address": "dfdfvdfv",
+                                "contact_number": "4645454654",
+                                "created_at": null,
+                                "updated_at": null
+                            }
+                        ],
+                        "department": {
+                            "id": 1,
+                            "name": "mechanical",
+                            "created_at": "2020-09-16T17:17:32.000000Z",
+                            "updated_at": "2020-09-17T13:45:28.000000Z"
+                        }
+                    },
+                    {
+                        "id": 3,
+                        "first_name": "sukanya",
+                        "last_name": "joshi",
+                        "email": "sdsf@dsfdf.com",
+                        "dept_id": 1,
+                        "created_at": "2020-09-17T10:56:42.000000Z",
+                        "updated_at": "2020-09-17T10:56:42.000000Z",
+                        "employees_contacts": [
+                            {
+                                "id": 5,
+                                "emp_id": 3,
+                                "address": "sdfcdf",
+                                "contact_number": "54684684654",
+                                "created_at": null,
+                                "updated_at": null
+                            },
+                            {
+                                "id": 6,
+                                "emp_id": 3,
+                                "address": "dfdfvdfv",
+                                "contact_number": "4645454654",
+                                "created_at": null,
+                                "updated_at": null
+                            }
+                        ],
+                        "department": {
+                            "id": 1,
+                            "name": "mechanical",
+                            "created_at": "2020-09-16T17:17:32.000000Z",
+                            "updated_at": "2020-09-17T13:45:28.000000Z"
+                        }
                     }
+                    
                 ]
-            },
-            {
-                ...
             }
-     *      ]
-     *
+
+     
      */
     public function index()
     {
@@ -78,12 +152,12 @@ class EmployeeController extends Controller
         if(count($employees)>0)
         {
             return response()
-            ->json(['data' => $employees], 200); 
+            ->json(['status'=>'Success','data' => $employees], 200); 
         }
         else
         {
             return response()
-            ->json(['message' => 'No data found'], 404); 
+            ->json(['status'=>'Failed','message' => 'No data found'], 404); 
         }
     }
 
@@ -112,34 +186,48 @@ class EmployeeController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "result": {
-                "id": 6,
-                "first_name": "sukanya",
-                "last_name": "joshi",
-                "email": "sdsf@dsfdf.com",
-                "dept_id": 1,
-                "created_at": "2020-09-17T13:14:16.000000Z",
-                "updated_at": "2020-09-17T13:14:16.000000Z",
-                "employees_contacts": [
-                    {
-                        "id": 11,
-                        "emp_id": 6,
-                        "address": "sdfcdf",
-                        "contact_number": "54684684654",
-                        "created_at": null,
-                        "updated_at": null
-                    },
-                    {
-                        "id": 12,
-                        "emp_id": 6,
-                        "address": "dfdfvdfv",
-                        "contact_number": "4645454654",
-                        "created_at": null,
-                        "updated_at": null
-                    }
-                ]
-            },
-            "message": "Employee created"
+     *     {
+                "status": "Success",
+                "result": {
+                    "id": 7,
+                    "first_name": "sukanya",
+                    "last_name": "joshi",
+                    "email": "sdsf@dsfdf.com",
+                    "dept_id": 1,
+                    "created_at": "2020-09-17T14:11:26.000000Z",
+                    "updated_at": "2020-09-17T14:11:26.000000Z",
+                    "employees_contacts": [
+                        {
+                            "id": 13,
+                            "emp_id": 7,
+                            "address": "sdfcdf",
+                            "contact_number": "54684684654",
+                            "created_at": null,
+                            "updated_at": null
+                        },
+                        {
+                            "id": 14,
+                            "emp_id": 7,
+                            "address": "dfdfvdfv",
+                            "contact_number": "4645454654",
+                            "created_at": null,
+                            "updated_at": null
+                        }
+                    ]
+                },
+                "message": "Employee created"
+        }
+     * @apiErrorExample Error-Response:
+     *  HTTP/1.1 422 Unprocessable Entity
+        {
+            "first_name": [
+                "The first name field is required."
+            ],
+            "last_name": [
+                "The last name field is required."
+            ]
+        }
+     *
      *
      */
 
@@ -178,11 +266,11 @@ class EmployeeController extends Controller
             if($getEmployee){
                 $data = $this->employeeRepository->getData($create->id,'employees_contacts');
                 return response()
-                    ->json(['result' => $data, 'message'=>'Employee created'], 200);
+                    ->json(['status'=>'Success','result' => $data, 'message'=>'Employee created'], 200);
             }
             else
                 return response()
-                    ->json([ 'message'=>'Unable to create employee'], 400);
+                    ->json(['status'=>'Failed', 'message'=>'Unable to create employee'], 400);
         }
             
     }
@@ -208,38 +296,40 @@ class EmployeeController extends Controller
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-            "result": {
-                "id": 4,
-                "first_name": "sukanya",
-                "last_name": "joshi",
-                "email": "sdsf@dsfdf.com",
-                "dept_id": 1,
-                "created_at": "2020-09-17T10:57:17.000000Z",
-                "updated_at": "2020-09-17T10:57:17.000000Z",
-                "department": {
-                    "id": 1,
-                    "name": "Computer",
-                    "created_at": "2020-09-16T17:17:32.000000Z",
-                    "updated_at": "2020-09-16T17:17:32.000000Z"
-                },
-                "employees_contacts": [
-                    {
-                        "id": 7,
-                        "emp_id": 4,
-                        "address": "sdfcdf",
-                        "contact_number": "54684684654",
-                        "created_at": null,
-                        "updated_at": null
+            {
+                "result": {
+                    "id": 4,
+                    "first_name": "sukanya",
+                    "last_name": "joshi",
+                    "email": "sdsf@dsfdf.com",
+                    "dept_id": 1,
+                    "created_at": "2020-09-17T10:57:17.000000Z",
+                    "updated_at": "2020-09-17T10:57:17.000000Z",
+                    "department": {
+                        "id": 1,
+                        "name": "Computer",
+                        "created_at": "2020-09-16T17:17:32.000000Z",
+                        "updated_at": "2020-09-16T17:17:32.000000Z"
                     },
-                    {
-                        "id": 8,
-                        "emp_id": 4,
-                        "address": "dfdfvdfv",
-                        "contact_number": "4645454654",
-                        "created_at": null,
-                        "updated_at": null
-                    }
-                ]
+                    "employees_contacts": [
+                        {
+                            "id": 7,
+                            "emp_id": 4,
+                            "address": "sdfcdf",
+                            "contact_number": "54684684654",
+                            "created_at": null,
+                            "updated_at": null
+                        },
+                        {
+                            "id": 8,
+                            "emp_id": 4,
+                            "address": "dfdfvdfv",
+                            "contact_number": "4645454654",
+                            "created_at": null,
+                            "updated_at": null
+                        }
+                    ]
+                }
             }
      *
      * @apiError Not found The id of the employee was not found.
@@ -247,6 +337,7 @@ class EmployeeController extends Controller
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 404 Not Found
      *     {
+             "status":"Failed",
      *       "message": "No data found"
      *     }
      */
@@ -256,10 +347,10 @@ class EmployeeController extends Controller
         $showEmployee = $this->employeeRepository->getData($id,['department','employees_contacts']);
         if($showEmployee)
             return response()
-            ->json(['result' => $showEmployee], 200);
+            ->json(['status'=>'Success','result' => $showEmployee], 200);
         else
             return response()
-            ->json(['message' => 'No data found'], 404); 
+            ->json(['status'=>'Failed','message' => 'No data found'], 404); 
     }
 
     
@@ -278,6 +369,7 @@ class EmployeeController extends Controller
      * @apiSuccessExample Success-Response:
         HTTP/1.1 200 Success
      *     {
+     *        "status":"Success",
      *       "message": "Deleted successfully"
      *     }
      *
@@ -286,6 +378,7 @@ class EmployeeController extends Controller
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 400
      *     {
+     *        "status":  "Failed",
      *       "message": "Unable to delete"
      *     }
      */
@@ -294,9 +387,9 @@ class EmployeeController extends Controller
         $delete = $this->employeeRepository->delete($id);
         if($delete)
             return response()
-            ->json(['message' => 'Deleted successfully'], 200);
+            ->json(['status'=>'Success','message' => 'Deleted successfully'], 200);
         else
             return response()
-            ->json(['message' => 'Unable to delete'], 400);
+            ->json(['status'=>'Failed','message' => 'Unable to delete'], 400);
     }
 }
