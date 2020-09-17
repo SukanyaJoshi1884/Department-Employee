@@ -94,23 +94,52 @@ class EmployeeController extends Controller
      */
 
     /**
-     * @api {post} /department Create new department data
-     * @apiName create-department
-     * @apiGroup Departments
-     * @apiParam {String} name Name of department
-     * @apiSuccess {Number} id ID of department.
-     * @apiSuccess {String} name  Name of department.
+     * @api {post} /employee Create new employee data
+     * @apiName create-employee
+     * @apiGroup Employees
+     * @apiParam {String} first_name Name of employee
+     * @apiParam {String} last_name Name of employee
+     * @apiParam {String} email Name of employee
+     * @apiParam {Number} dept_id Name of employee
+     * @apiParam {Array} address Name of employee
+     * @apiParam {Array} contact_number Name of employee
+      * @apiSuccess {String} first_name first name of employee
+     * @apiSuccess {String} last_name last name of employee
+     * @apiSuccess {String} email email of employee
+     * @apiSuccess {Number} dept_id dept of employee
+     * @apiSuccess {Array} address address of employee
+     * @apiSuccess {Array} contact_number contact number of employee
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+     *     "result": {
+                "id": 6,
+                "first_name": "sukanya",
+                "last_name": "joshi",
+                "email": "sdsf@dsfdf.com",
+                "dept_id": 1,
+                "created_at": "2020-09-17T13:14:16.000000Z",
+                "updated_at": "2020-09-17T13:14:16.000000Z",
+                "employees_contacts": [
+                    {
+                        "id": 11,
+                        "emp_id": 6,
+                        "address": "sdfcdf",
+                        "contact_number": "54684684654",
+                        "created_at": null,
+                        "updated_at": null
+                    },
+                    {
+                        "id": 12,
+                        "emp_id": 6,
+                        "address": "dfdfvdfv",
+                        "contact_number": "4645454654",
+                        "created_at": null,
+                        "updated_at": null
+                    }
+                ]
+            },
+            "message": "Employee created"
      *
      */
 
@@ -166,25 +195,54 @@ class EmployeeController extends Controller
      */
 
     /**
-     * @api {get} /department/{id} Show department data
-     * @apiName show-department
-     * @apiGroup Departments
-     * @apiParam {Number} id ID of department
-     * @apiSuccess {Number} id ID of department.
-     * @apiSuccess {String} name  Name of department.
+     * @api {get} /employee/{id} Show employee data
+     * @apiName show-employee
+     * @apiGroup Employees
+     * @apiParam {Number} id ID of employee
+     * @apiSuccess {String} first_name first name of employee
+     * @apiSuccess {String} last_name last name of employee
+     * @apiSuccess {String} email email of employee
+     * @apiSuccess {Number} dept_id dept of employee
+     * @apiSuccess {Array} address address of employee
+     * @apiSuccess {Array} contact_number contact number of employee
      *
      * @apiSuccessExample Success-Response:
      *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
+            "result": {
+                "id": 4,
+                "first_name": "sukanya",
+                "last_name": "joshi",
+                "email": "sdsf@dsfdf.com",
+                "dept_id": 1,
+                "created_at": "2020-09-17T10:57:17.000000Z",
+                "updated_at": "2020-09-17T10:57:17.000000Z",
+                "department": {
+                    "id": 1,
+                    "name": "Computer",
+                    "created_at": "2020-09-16T17:17:32.000000Z",
+                    "updated_at": "2020-09-16T17:17:32.000000Z"
+                },
+                "employees_contacts": [
+                    {
+                        "id": 7,
+                        "emp_id": 4,
+                        "address": "sdfcdf",
+                        "contact_number": "54684684654",
+                        "created_at": null,
+                        "updated_at": null
+                    },
+                    {
+                        "id": 8,
+                        "emp_id": 4,
+                        "address": "dfdfvdfv",
+                        "contact_number": "4645454654",
+                        "created_at": null,
+                        "updated_at": null
+                    }
+                ]
+            }
      *
-     * @apiError Not found The id of the department was not found.
+     * @apiError Not found The id of the employee was not found.
      *
      * @apiErrorExample Error-Response:
      *     HTTP/1.1 404 Not Found
@@ -195,62 +253,16 @@ class EmployeeController extends Controller
     public function show($id)
     {
 
-        $showDepartment = $this->employeeRepository->get($id);
-        if($showDepartment)
+        $showEmployee = $this->employeeRepository->getData($id,['department','employees_contacts']);
+        if($showEmployee)
             return response()
-            ->json(['result' => $showDepartment], 200);
+            ->json(['result' => $showEmployee], 200);
         else
             return response()
             ->json(['message' => 'No data found'], 404); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
-     * @api {post} /department/{id} Update department data
-     * @apiName update-department
-     * @apiGroup Departments
-     * @apiParam {String} name Name of department
-     * @apiSuccess {Number} id ID of department.
-     * @apiSuccess {String} name  Name of department.
-     *
-     * @apiSuccessExample Success-Response:
-     *     HTTP/1.1 200 OK
-     *     "data": [
-     *         {
-     *          "id": 1,
-     *          "name": "Computer",
-     *          "created_at": "2020-09-16T17:17:32.000000Z",
-     *          "updated_at": "2020-09-16T17:17:32.000000Z"
-     *          }
-     *      ]
-     *
-     */
-    public function update(Request $request, $id)
-    {
-        //validate form fields
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
-        $data = $request->all();
-        $updateDepartment = $this->employeeRepository->update($id,$data);
-        if($updateDepartment){
-            $newData = $this->employeeRepository->get($id);
-            return response()
-            ->json(['result' => $newData], 200);
-        }
-            
-        else
-            return response()
-            ->json(['message' => 'Unable to update data'], 400);
-
-    }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -260,9 +272,9 @@ class EmployeeController extends Controller
      */
 
     /**
-     * @api {delete} /department/{id} Delete department
-     * @apiName delete-department
-     * @apiGroup Departments
+     * @api {delete} /employee/{id} Delete employee
+     * @apiName delete-employee
+     * @apiGroup Employees
      * @apiSuccessExample Success-Response:
         HTTP/1.1 200 Success
      *     {

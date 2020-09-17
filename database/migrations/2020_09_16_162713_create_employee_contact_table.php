@@ -17,7 +17,7 @@ class CreateEmployeeContactTable extends Migration
             $table->id();
 
             $table->bigInteger('emp_id')->unsigned(); 
-            $table->foreign('emp_id')->references('id')->on('table_employee');
+            $table->foreign('emp_id')->references('id')->on('table_employee')->onDelete('cascade');
 
             $table->text('address');
             $table->string('contact_number',30);

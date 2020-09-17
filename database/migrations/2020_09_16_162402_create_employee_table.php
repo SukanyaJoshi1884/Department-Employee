@@ -17,7 +17,7 @@ class CreateEmployeeTable extends Migration
             $table->id();
 
             $table->bigInteger('dept_id')->unsigned(); 
-            $table->foreign('dept_id')->references('id')->on('table_department');
+            $table->foreign('dept_id')->references('id')->on('table_department')->onDelete('cascade');
 
             $table->string('first_name',100);
             $table->string('last_name',100);
